@@ -1,0 +1,17 @@
+---
+- name: Installs and run Fuse
+  hosts: localhost
+  tasks:
+    - name: download Fuse
+      get_url:
+        url: https://origin-repository.jboss.org/nexus/content/groups/ea/org/jboss/fuse/fuse-karaf/7.2.0.fuse-720005/fuse-karaf-7.2.0.fuse-720005.zip
+        dest: /home/oscerd/playground/fuse-karaf-7.2.0.fuse-720005.zip
+        checksum: md5:ef9d91e6a48962581832cd101004a677
+
+    - name: unarchive the Fuse distro
+      command: unzip /home/oscerd/playground/fuse-karaf-7.2.0.fuse-720005.zip
+      register: unzip_result
+
+    - name: print result
+      debug:
+        msg: "Unzipping distro {{ unzip_result }}"
