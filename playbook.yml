@@ -9,7 +9,7 @@
         checksum: md5:ef9d91e6a48962581832cd101004a677
 
     - name: unarchive the Fuse distro
-      command: unzip /home/oscerd/playground/fuse-karaf-7.2.0.fuse-720005.zip
+      command: unzip /home/oscerd/playground/fuse-karaf-7.2.0.fuse-720005.zip -d /home/oscerd/playground
       register: unzip_result
 
     - name: print result
