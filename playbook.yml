@@ -1,15 +1,19 @@
 ---
-- name: Installs and run Fuse
+- name: Install and unzip Fuse
   hosts: localhost
+
   tasks:
+    - name: Include vars
+      include_vars: vars.yml
+
     - name: download Fuse
       get_url:
-        url: https://origin-repository.jboss.org/nexus/content/groups/ea/org/jboss/fuse/fuse-karaf/7.2.0.fuse-720005/fuse-karaf-7.2.0.fuse-720005.zip
-        dest: /home/oscerd/playground/fuse-karaf-7.2.0.fuse-720005.zip
-        checksum: md5:ef9d91e6a48962581832cd101004a677
+        url: "https://origin-repository.jboss.org/nexus/content/groups/ea/org/jboss/fuse/fuse-karaf/{{ fuse_version }}/fuse-karaf-{{ fuse_version }}.zip"
+        dest: "{{ dest_dir }}/fuse-karaf-{{ fuse_version }}.zip"
+        checksum: "{{ md5sum }}"
 
     - name: unarchive the Fuse distro
-      command: unzip /home/oscerd/playground/fuse-karaf-7.2.0.fuse-720005.zip -d /home/oscerd/playground
+      command: "unzip {{ dest_dir }}/fuse-karaf-{{ fuse_version }}.zip -d {{ unzip_dest_dir }}"
       register: unzip_result
 
     - name: print result
