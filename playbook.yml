@@ -1,10 +1,16 @@
 ---
 - name: Install and unzip Fuse
   hosts: localhost
+  become: yes
 
   tasks:
     - name: Include vars
       include_vars: vars.yml
+
+    - name: Ensure unzip is installed
+      yum:
+        name: unzip
+        state: latest
 
     - name: download Fuse
       get_url:
