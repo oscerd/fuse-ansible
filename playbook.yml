@@ -38,9 +38,4 @@
 
     - name: unarchive the Fuse distro
       command: "unzip -n {{ dest_dir }}/fuse-karaf-{{ fuse_version }}.zip -d {{ unzip_dest_dir }}"
-      register: unzip_result
       when: file_details.stat.exists is defined
-
-    - name: print result
-      debug:
-        msg: "Unzipping distro {{ unzip_result }}"
