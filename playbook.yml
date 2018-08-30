@@ -18,9 +18,28 @@
         dest: "{{ dest_dir }}/fuse-karaf-{{ fuse_version }}.zip"
         checksum: "{{ md5sum }}"
 
+    - name: Ansible check file exists example.
+      stat:
+        path: "{{ unzip_dest_dir }}"
+      register: file_details
+
+    - debug:
+        msg: "The directory {{ unzip_dest_dir }} exists"
+      when: file_details.stat.exists
+
+    - name: Create directory if it doesn't exists.
+      file:
+        path: "{{ unzip_dest_dir }}"
+        owner: "{{ dest_dir_owner }}"
+        group: "{{ dest_dir_group }}"
+        recurse: yes
+        force: yes
+      when: file_details.stat.exists is not defined
+
     - name: unarchive the Fuse distro
-      command: "unzip {{ dest_dir }}/fuse-karaf-{{ fuse_version }}.zip -d {{ unzip_dest_dir }}"
+      command: "unzip -n {{ dest_dir }}/fuse-karaf-{{ fuse_version }}.zip -d {{ unzip_dest_dir }}"
       register: unzip_result
+      when: file_details.stat.exists is defined
 
     - name: print result
       debug:
