@@ -1,0 +1,34 @@
+---
+# tasks file for fuse7
+  - yum:
+      name: unzip
+      state: latest
+
+  - name: download Fuse
+    get_url:
+      url: "https://origin-repository.jboss.org/nexus/content/groups/ea/org/jboss/fuse/fuse-karaf/{{ fuse_version }}/fuse-karaf-{{ fuse_version }}.zip"
+      dest: "{{ dest_dir }}/fuse-karaf-{{ fuse_version }}.zip"
+      checksum: "{{ md5sum }}"
+
+  - name: Ansible check directory exists.
+    stat:
+      path: "{{ unzip_dest_dir }}"
+    register: file_details
+
+  - debug:
+      msg: "The directory {{ unzip_dest_dir }} exists"
+    when: file_details.stat.exists == true
+
+  - name: Create directory if it doesn't exists.
+    file:
+      path: "{{ unzip_dest_dir }}"
+      state: directory
+      owner: "{{ dest_dir_owner }}"
+      group: "{{ dest_dir_group }}"
+      recurse: yes
+      force: yes
+    when: file_details.stat.exists == false
+
+  - name: unarchive the Fuse distro
+    command: "unzip -n {{ dest_dir }}/fuse-karaf-{{ fuse_version }}.zip -d {{ unzip_dest_dir }}"
+    when: file_details.stat.exists is defined
