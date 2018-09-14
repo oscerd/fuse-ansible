@@ -1,1 +1,1 @@
-ansible-playbook playbook.yml --ask-become-pass
+Role for Fuse 7
