@@ -17,7 +17,7 @@
 
   - debug:
       msg: "The directory {{ unzip_dest_dir }} exists"
-    when: file_details.stat.exists == true
+    when: file_details.stat.exists
 
   - name: Create directory if it doesn't exists.
     file:
@@ -27,10 +27,9 @@
       group: "{{ dest_dir_group }}"
       recurse: yes
       force: yes
-    when: file_details.stat.exists == false
+    when: not file_details.stat.exists 
 
   - name: unarchive the Fuse distro
     shell: "unzip -n {{ dest_dir }}/fuse-karaf-{{ fuse_version }}.zip -d {{ unzip_dest_dir }}"
     args:
       warn: false
-    when: file_details.stat.exists is defined
