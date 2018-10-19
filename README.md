@@ -6,7 +6,7 @@ An example of Fuse 7 role use:
 ---
 - name: role fuse7
   hosts: localhost
-  become: true
+  remote_user: user
   
   roles:
     - role: fuse7
@@ -14,6 +14,4 @@ An example of Fuse 7 role use:
       dest_dir: /home/user/
       md5sum: md5:877d191b86d26e13136a1e8f142f4164
       unzip_dest_dir: /home/user/fuse/
-      dest_dir_owner: user
-      dest_dir_group: user
 ``` 
