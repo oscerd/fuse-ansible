@@ -30,5 +30,7 @@
     when: file_details.stat.exists == false
 
   - name: unarchive the Fuse distro
-    command: "unzip -n {{ dest_dir }}/fuse-karaf-{{ fuse_version }}.zip -d {{ unzip_dest_dir }}"
+    shell: "unzip -n {{ dest_dir }}/fuse-karaf-{{ fuse_version }}.zip -d {{ unzip_dest_dir }}"
+    args:
+      warn: false
     when: file_details.stat.exists is defined
