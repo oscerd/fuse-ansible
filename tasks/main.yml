@@ -29,7 +29,13 @@
       force: yes
     when: not file_details.stat.exists 
 
+  - name: Ansible unzip destination directory exists.
+    stat:
+      path: "{{ unzip_dest_dir }}/fuse-karaf-{{ fuse_version }}"
+    register: unzipdir
+
   - name: unarchive the Fuse distro
     shell: "unzip -n {{ dest_dir }}/fuse-karaf-{{ fuse_version }}.zip -d {{ unzip_dest_dir }}"
     args:
       warn: false
+    when: not unzipdir.stat.exists 
