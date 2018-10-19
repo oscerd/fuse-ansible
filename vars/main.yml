@@ -1,8 +1,2 @@
 ---
 # vars file for fuse7
-fuse_version: 7.2.0.fuse-720014
-dest_dir: /home/oscerd/playground
-md5sum: md5:80d899ecb9768d7fefe81b16bedecec3
-unzip_dest_dir: /home/oscerd/playground/fuse_experiment3/
-dest_dir_owner: oscerd
-dest_dir_group: oscerd
