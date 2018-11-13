@@ -4,12 +4,6 @@
       name: unzip
       state: latest
 
-  - name: download Fuse
-    get_url:
-      url: "https://origin-repository.jboss.org/nexus/content/groups/ea/org/jboss/fuse/fuse-karaf/{{ fuse_version }}/fuse-karaf-{{ fuse_version }}.zip"
-      dest: "{{ dest_dir }}/fuse-karaf-{{ fuse_version }}.zip"
-      checksum: "{{ md5sum }}"
-
   - name: Ansible check directory exists.
     stat:
       path: "{{ unzip_dest_dir }}"
@@ -33,7 +27,7 @@
     register: unzipdir
 
   - name: unarchive the Fuse distro
-    shell: "unzip -n {{ dest_dir }}/fuse-karaf-{{ fuse_version }}.zip -d {{ unzip_dest_dir }}"
+    shell: "unzip -n {{ path_dir }}/{{ fuse_version }} -d {{ unzip_dest_dir }}"
     args:
       warn: false
     when: not unzipdir.stat.exists 
