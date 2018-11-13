@@ -1,3 +1,4 @@
 ---
 # defaults file for fuse7
 karaf_clean_all: false
+karaf_clean_cache: false
