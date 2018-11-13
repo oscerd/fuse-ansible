@@ -45,12 +45,11 @@
       regexp: 'https://repository.jboss.org/nexus/content/groups/ea@id=fuseearlyaccess'
     when: additional_maven_repositories is defined
 
-  - name: Add additional mvn repos
+  - name: Karaf clean all
     lineinfile:
-      dest: '{{ unzip_dest_dir }}/fuse-karaf-{{ fuse_version }}/etc/org.ops4j.pax.url.mvn.cfg'
-      line: "{{ item }}"
-      insertafter: 'https://repository.jboss.org/nexus/content/groups/ea@id=fuseearlyaccess,*'
-      state: present
-    with_items:
-      - '{{ additional_maven_repositories }}'
-    when: additional_maven_repositories is defined
+      dest: '{{ unzip_dest_dir }}/fuse-karaf-{{ fuse_version }}/etc/system.properties'
+      regexp: "karaf.clean.all = false"
+      line: "karaf.clean.all = true"
+    when: karaf_clean_all
+
+
