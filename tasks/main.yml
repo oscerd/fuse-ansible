@@ -27,28 +27,28 @@
     register: unzipdir
 
   - name: unarchive the Fuse distro
-    shell: "unzip -n {{ path_dir }}/{{ fuse_version }} -d {{ unzip_dest_dir }}"
+    shell: "unzip -n {{ path_dir }}/{{ fuse_version }}.zip -d {{ unzip_dest_dir }}"
     args:
       warn: false
     when: not unzipdir.stat.exists 
 
   - name: Override last mvn repo if the additional repositories are defined
     lineinfile:
-      dest: '{{ unzip_dest_dir }}/fuse-karaf-{{ fuse_version }}/etc/org.ops4j.pax.url.mvn.cfg'
+      dest: '{{ unzip_dest_dir }}/{{ fuse_version }}/etc/org.ops4j.pax.url.mvn.cfg'
       line: '    https://repository.jboss.org/nexus/content/groups/ea@id=fuseearlyaccess, \'
       regexp: 'https://repository.jboss.org/nexus/content/groups/ea@id=fuseearlyaccess'
     when: additional_maven_repositories is defined
 
   - name: Override karaf.clean.all option if specified
     lineinfile:
-      dest: '{{ unzip_dest_dir }}/fuse-karaf-{{ fuse_version }}/etc/system.properties'
+      dest: '{{ unzip_dest_dir }}/{{ fuse_version }}/etc/system.properties'
       regexp: "karaf.clean.all = false"
       line: "karaf.clean.all = true"
     when: karaf_clean_all
 
   - name: Override karaf.clean.cache option if specified
     lineinfile:
-      dest: '{{ unzip_dest_dir }}/fuse-karaf-{{ fuse_version }}/etc/system.properties'
+      dest: '{{ unzip_dest_dir }}/{{ fuse_version }}/etc/system.properties'
       regexp: "karaf.clean.cache = false"
       line: "karaf.clean.cache = true"
     when: karaf_clean_cache
