@@ -45,11 +45,18 @@
       regexp: 'https://repository.jboss.org/nexus/content/groups/ea@id=fuseearlyaccess'
     when: additional_maven_repositories is defined
 
-  - name: Karaf clean all
+  - name: Override karaf.clean.all option if specified
     lineinfile:
       dest: '{{ unzip_dest_dir }}/fuse-karaf-{{ fuse_version }}/etc/system.properties'
       regexp: "karaf.clean.all = false"
       line: "karaf.clean.all = true"
     when: karaf_clean_all
+
+  - name: Override karaf.clean.cache option if specified
+    lineinfile:
+      dest: '{{ unzip_dest_dir }}/fuse-karaf-{{ fuse_version }}/etc/system.properties'
+      regexp: "karaf.clean.cache = false"
+      line: "karaf.clean.cache = true"
+    when: karaf_clean_cache
 
 
