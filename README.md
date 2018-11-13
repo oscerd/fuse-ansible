@@ -11,7 +11,7 @@ An example of Fuse 7 role use:
   roles:
     - role: fuse7
       fuse_version: fuse-karaf-7.2.0.fuse-720023
-      dest_dir: /home/user/
+      path_dir: /home/user/
       unzip_dest_dir: /home/user/fuse/
       additional_maven_repositories:
         - "http://maven.repo.com/test/test@id=test"
