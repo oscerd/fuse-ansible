@@ -73,4 +73,8 @@
       line: "karaf.clean.cache = true"
     when: karaf_clean_cache
 
+  - name: Start Fuse
+    command: '{{ unzip_dest_dir }}/{{ fuse_version }}/bin/start'
+    when: start_fuse
+
 
