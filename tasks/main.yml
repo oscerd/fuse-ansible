@@ -73,6 +73,16 @@
       line: "karaf.clean.cache = true"
     when: karaf_clean_cache
 
+  - name: Enable Admin user
+    lineinfile:
+      dest: '{{ unzip_dest_dir }}/{{ fuse_version }}/etc/users.properties'
+      regexp: "{{ item.regexp }}"
+      line: "{{ item.line }}"
+    with_items:
+    - { regexp: '#admin = admin,_g_:admingroup', line: 'admin = admin,_g_:admingroup' }
+    - { regexp: '#_g_\:admingroup = group,admin,manager,viewer,systembundles,ssh', line: '_g_\:admingroup = group,admin,manager,viewer,systembundles,ssh' }
+    when: enable_admin
+
   - name: Start Fuse
     command: '{{ unzip_dest_dir }}/{{ fuse_version }}/bin/start'
     when: start_fuse
