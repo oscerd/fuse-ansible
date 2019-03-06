@@ -80,7 +80,7 @@
       line: "{{ item.line }}"
     with_items:
     - { regexp: '#admin = admin,_g_:admingroup', line: 'admin = admin,_g_:admingroup' }
-    - { regexp: '#_g_\:admingroup = group,admin,manager,viewer,systembundles,ssh', line: '_g_\:admingroup = group,admin,manager,viewer,systembundles,ssh' }
+    - { regexp: '#_g_\\:admingroup = group,admin,manager,viewer,systembundles,ssh', line: '_g_\:admingroup = group,admin,manager,viewer,systembundles,ssh' }
     when: enable_admin
 
   - name: Start Fuse
