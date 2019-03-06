@@ -83,6 +83,16 @@
     - { regexp: '#_g_\\:admingroup = group,admin,manager,viewer,systembundles,ssh', line: '_g_\:admingroup = group,admin,manager,viewer,systembundles,ssh' }
     when: enable_admin
 
+  - name: Add additional users
+    lineinfile:
+      dest: '{{ unzip_dest_dir }}/{{ fuse_version }}/etc/users.properties'
+      line: "{{ item }}"
+      insertafter: 'admin = admin,_g_:admingroup'
+      state: present
+    with_items:
+      - '{{ additional_users }}'
+    when: additional_users is defined and enable_admin
+
   - name: Start Fuse
     command: '{{ unzip_dest_dir }}/{{ fuse_version }}/bin/start'
     when: start_fuse
