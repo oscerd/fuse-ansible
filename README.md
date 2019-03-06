@@ -17,4 +17,6 @@ An example of Fuse 7 role use:
         - "http://maven.repo.com/test/test@id=test"
       karaf_clean_all: false
       karaf_clean_cache: false
+      enable_admin: false
+      start_fuse: false
 ``` 
