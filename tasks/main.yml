@@ -93,6 +93,13 @@
       - '{{ additional_users }}'
     when: additional_users is defined and enable_admin
 
+  - name: Set log level
+    lineinfile:
+      dest: '{{ unzip_dest_dir }}/{{ fuse_version }}/etc/org.ops4j.pax.logging.cfg'
+      regexp: "log4j2.rootLogger.level = INFO"
+      line: "log4j2.rootLogger.level = {{ log_level }}"
+    when: log_level is defined
+
   - name: Start Fuse
     command: '{{ unzip_dest_dir }}/{{ fuse_version }}/bin/start'
     when: start_fuse
