@@ -10,7 +10,7 @@ An example of Fuse 7 role use:
   
   roles:
     - role: fuse7
-      fuse_version: fuse-karaf-7.2.0.fuse-720035-redhat-00001
+      fuse_version: fuse-karaf-7.3.0
       path_dir: /home/user/
       unzip_dest_dir: /home/user/fuse/
       additional_maven_repositories:
