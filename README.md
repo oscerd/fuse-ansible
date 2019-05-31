@@ -22,3 +22,18 @@ An example of Fuse 7 role use:
         - "admin_test = admin_test,_g_:admingroup"
       start_fuse: true
 ``` 
+
+## Role options
+
+| Name                                 | Description                                                                                                               |
+|--------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
+| fuse_version                         | The name of the fuse zip distribution                                                                                     |
+| path_dir                             | The location of the fuse zip distribution                                                                                 |
+| unzip_dest_dir                       | The location of the dire where to unzip the fuse zip distribution                                                         |
+| additional_maven_repositories        | List of additional maven repositories to use                                                                              |
+| karaf_clean_all                      | Setting of the karaf.clean.all option                                                                                     |
+| karaf_clean_cache                    | Setting of the karaf.clean.cache option                                                                                   |
+| enable_admin                         | If the admin role must be enabled or not                                                                                  |
+| additional_users                     | A list of additional users in the form `admin_test = admin_test,_g_:admingroup`                                           |
+| start_fuse                           | Start Fuse at the end of the ansible playbook                                                                             |
+| log_level                            | Log level of the root logger                                                                                              |
